@@ -9,8 +9,13 @@ import hello.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private DiscountPolicy discountPolicy;
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy; //final로 되어있으면 기본으로 하든 생성자로 하든 무조건 할당이 되어있어야 함!
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
