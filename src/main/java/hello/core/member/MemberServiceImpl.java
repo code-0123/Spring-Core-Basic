@@ -3,7 +3,7 @@ package hello.core.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("service")
+@Component
 public class MemberServiceImpl implements MemberService{
 
     //가입하고 회원을 찾으려면 앞에서 만들었던 MemberRepository가 필요하다
