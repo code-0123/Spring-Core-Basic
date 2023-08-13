@@ -12,8 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService{
 
-    private MemberRepository memberRepository;
-    private DiscountPolicy discountPolicy; //final로 되어있으면 기본으로 하든 생성자로 하든 무조건 할당이 되어있어야 함!
+    //의존관계를 필드에 바로 주입하는 것(private인데도 가능하다)
+    @Autowired private MemberRepository memberRepository;
+    @Autowired private DiscountPolicy discountPolicy;
+
+
+/*
     @Autowired
     public void setMemberRepository(MemberRepository memberRepository){
         System.out.println("memberRepository = " + memberRepository);
@@ -38,6 +42,7 @@ public class OrderServiceImpl implements OrderService{
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+*/
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
