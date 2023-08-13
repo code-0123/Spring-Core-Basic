@@ -30,4 +30,13 @@ public class OrderServiceTest {
         Order order = orderService.createOrder(memberId, "itemA", 10000);
         Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
     }
+
+
+    @Test
+    void fieldInjection(){
+        OrderServiceImpl orderService = new OrderServiceImpl();
+        //Reposiotry를 내가 원하는걸 넣어서 바꾸고 싶다면? (->못함. 방법이 아예 없음)
+        orderService.createOrder(1L, "itemA", 10000); //널포인트익셉션 뜬다
+        
+    }
 }
