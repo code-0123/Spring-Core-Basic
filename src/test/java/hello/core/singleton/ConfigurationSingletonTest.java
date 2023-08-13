@@ -4,9 +4,12 @@ import hello.core.AppConfig;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemberServiceImpl;
 import hello.core.order.OrderServiceImpl;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class ConfigurationSingletonTest {
 
@@ -17,13 +20,17 @@ public class ConfigurationSingletonTest {
 
         MemberServiceImpl memberService = ac.getBean("memberService", MemberServiceImpl.class); //원래는 이렇게 구체 타입으로 꺼내면 안 좋음!(지금은 그냥 테스트니까...)
         OrderServiceImpl orderService = ac.getBean("orderService", OrderServiceImpl.class);
-
+        MemberRepository memberRepository = ac.getBean("memberRepository", MemberRepository.class);
 
         MemberRepository memberRepository1 = memberService.getMemberRepository();
         MemberRepository memberRepository2 = orderService.getMemberRepository();
 
+        System.out.println("memberRepository = " + memberRepository);
         System.out.println(" memberService -> memberRepository = " + memberRepository1);
         System.out.println(" orderService -> memberRepository = " + memberRepository2);
+
+        assertThat(memberService.getMemberRepository()).isSameAs(memberRepository);
+        assertThat(orderService.getMemberRepository()).isSameAs(memberRepository);
 
     }
 }
