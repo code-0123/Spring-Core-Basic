@@ -12,11 +12,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService{
 
-    private final MemberRepository memberRepository;
-    private final DiscountPolicy discountPolicy; //final로 되어있으면 기본으로 하든 생성자로 하든 무조건 할당이 되어있어야 함!
+    private MemberRepository memberRepository;
+    private DiscountPolicy discountPolicy; //final로 되어있으면 기본으로 하든 생성자로 하든 무조건 할당이 되어있어야 함!
+    @Autowired
+    public void setMemberRepository(MemberRepository memberRepository){
+        System.out.println("memberRepository = " + memberRepository);
+        this.memberRepository = memberRepository;
+    }
+    @Autowired
+    public void setDiscountPolicy(DiscountPolicy discountPolicy){
+        System.out.println("discountPolicy = " + discountPolicy);
+        this.discountPolicy = discountPolicy;
+    }
 
+    // new OrderServiceImpl(memberRepository,discountPolicy);
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+
+        System.out.println("1. OrderServiceImpl.OrderServiceImpl");
+
+//        System.out.println("memberRepository = " + memberRepository);
+//        System.out.println("discountPolicy = " + discountPolicy);
+        //AutoAppConfigTest 돌려보기
+        //생성자 호출이 될 때 스프링 컨테이너에서 스프링빈이 들어오면 memberRepository와 discountPolicy이 not null이고 값이 있을 것
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
