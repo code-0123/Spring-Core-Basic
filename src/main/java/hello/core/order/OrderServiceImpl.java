@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class OrderServiceImpl implements OrderService{
 
     //의존관계를 필드에 바로 주입하는 것(private인데도 가능하다)
-     private MemberRepository memberRepository;
-     private DiscountPolicy discountPolicy;
+     private final MemberRepository memberRepository;
+     private final DiscountPolicy discountPolicy;
 
 /*    public void setMemberRepository(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
@@ -24,7 +24,7 @@ public class OrderServiceImpl implements OrderService{
         this.discountPolicy = discountPolicy;
     }*/
 
-    @Autowired
+/*    @Autowired
     public void setMemberRepository(MemberRepository memberRepository){
         System.out.println("memberRepository = " + memberRepository);
         this.memberRepository = memberRepository;
@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService{
     public void setDiscountPolicy(DiscountPolicy discountPolicy){
         System.out.println("discountPolicy = " + discountPolicy);
         this.discountPolicy = discountPolicy;
-    }
+    }*/
 
     // new OrderServiceImpl(memberRepository,discountPolicy);
     @Autowired
@@ -49,11 +49,13 @@ public class OrderServiceImpl implements OrderService{
         this.discountPolicy = discountPolicy;
     }
 
-    @Autowired
+
+
+/*    @Autowired
     public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy){
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
-    }
+    }*/
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
