@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor //final이 붙은 필수값을 가지고 생성자를 만들어준다
 public class OrderServiceImpl implements OrderService{
 
     //의존관계를 필드에 바로 주입하는 것(private인데도 가능하다)
@@ -38,7 +37,8 @@ public class OrderServiceImpl implements OrderService{
     }*/
 
     // new OrderServiceImpl(memberRepository,discountPolicy);
-/*    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+     @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
 
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
 
@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService{
         //생성자 호출이 될 때 스프링 컨테이너에서 스프링빈이 들어오면 memberRepository와 discountPolicy이 not null이고 값이 있을 것
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
-    }*/
+    }
 
 
 
