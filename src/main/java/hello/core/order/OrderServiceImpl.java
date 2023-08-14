@@ -8,6 +8,7 @@ import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,6 +17,9 @@ public class OrderServiceImpl implements OrderService{
     //의존관계를 필드에 바로 주입하는 것(private인데도 가능하다)
      private final MemberRepository memberRepository;
      private final DiscountPolicy discountPolicy;
+
+     @Autowired
+     private DiscountPolicy rateDiscountPolicy;
 
 /*    public void setMemberRepository(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
