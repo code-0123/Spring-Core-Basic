@@ -14,22 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 public class LogDemoController {
 
     private final LogDemoService logDemoService;
-    private final ObjectProvider<MyLogger> myLoggerProvider; // myLogger를 주입받는게 아니라 myLogger를 찾을 수 있는, 디펜던시를 룩업할 수 있는 애가 주입된다
+    private final MyLogger myLogger;
 
     @RequestMapping("log-demo")
     @ResponseBody
     public String logDemo(HttpServletRequest request) throws InterruptedException {
 
-        MyLogger myLogger = myLoggerProvider.getObject();
         String requestURL = request.getRequestURL().toString();
+
+        System.out.println("myLogger = " + myLogger.getClass());
         myLogger.setRequestURL(requestURL);
 
         myLogger.log("controller test");
-
         Thread.sleep(1000);
-
         logDemoService.logic("testId");
-
         return "OK";
     }
 }
